@@ -1,22 +1,27 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/customers')
+      .then(res => res.json())
+      .then(customers => setCustomers(customers));
+    console.log('Customers fetched...', customers);
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h2>Customers</h2>
+        <ul>
+          {customers.map(customer => (
+            <li key={customer.id}>
+              {customer.firstName} {customer.lastName}
+            </li>
+          ))}
+        </ul>
       </header>
     </div>
   );
