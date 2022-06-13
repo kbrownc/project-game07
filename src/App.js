@@ -20,7 +20,9 @@ function App() {
     };
     fetch('/api', options)
     .then(res => res.json())
-    .then(msg => console.log('response', msg));
+    .then(msg => {if (msg.status !== 'success') {
+      setError('game not added to db')
+    }});
   };
 
   useEffect(() => {
