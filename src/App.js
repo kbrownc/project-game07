@@ -1,29 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Navbar from './Navbar';
+import Home from './Home';
+import Create from './Create';
+import Remove from './Remove';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [games, setGames] = useState([]);
-  const [gameName, setGameName] = useState('');
-  const [type, setType] = useState('');
-  const [url, setUrl] = useState('');
   const [error, setError] = useState(null);
-  const published = new Date().toDateString();
-
-  const addGame = (e) => {
-    e.preventDefault();
-    const game = {gameName, type, url, published};
-    console.log('client POST', game);
-    const options = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(game)
-    };
-    fetch('/api', options)
-    .then(res => res.json())
-    .then(msg => {if (msg.status !== 'success') {
-      setError('game not added to db')
-    }});
-  };
 
   useEffect(() => {
     fetch('/api/games')
@@ -34,57 +18,28 @@ function App() {
         return res.json();
       })
       .then(games => {
-        console.log('client GET',games);
         setGames(games);
         setError(null);
       })
       .catch(err => {
-        setError(err.message)        
-      }) 
+        setError(err.message);
+      });
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Kim Game Inventory</h2>
-        {error && <div>{error}</div>}
-        <form onSubmit={addGame}>
-          <label>Game Name:</label>
-          <input 
-            type="text"
-            required
-            value={gameName}
-            onChange={(e) => setGameName(e.target.value)}
-          />
-          <label>Game Type:</label>
-          <input 
-            type="text"
-            required
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          />
-          <label>Game URL:</label>
-          <input 
-            type="text"
-            required
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <p></p>
-          <button>Add Game</button>
-        </form>
-        <p>{gameName}</p>
-        <p>{type}</p>
-        <p>{url}</p>
-        <ul>
-          {games.map(game => (
-            <li key={game._id}>
-              {game.gameName} {game.type} {game.url} {game.published}
-            </li>
-          ))}
-        </ul>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          {error && <div>{error}</div>}
+          <Routes>
+            <Route exact path="/" element={<Home games={games} />} />
+            <Route exact path="/Create" element={<Create />} />
+            <Route exact path="/Remove" element={<Remove  games={games}/>} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
