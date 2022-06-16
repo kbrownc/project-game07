@@ -1,19 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
-const Remove = ({games, setError}) => {
+const Remove = ({games, setError, error}) => {
   const navigate = useNavigate();
 
-  const removeGame = e => {
-    e.preventDefault();
-    //const removeGameId = { games._id };
-    const removeGameId = 1;
-    console.log('Remove',games);
+  const removeGame = (id) => {
+    //e.preventDefault();
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(removeGameId),
+      method: 'DELETE'
     };
-    fetch('/api', options)
+    console.log(typeof id);
+    fetch('/api/games/'+id, options)
       .then(res => res.json())
       .then(msg => {
         if (msg.status !== 'success') {
@@ -34,7 +30,7 @@ const Remove = ({games, setError}) => {
                 <p>Type: {game.type}</p>
                 <p>URL: {game.url}</p>
                 <p>Date published: {game.published}</p>
-                <button onClick={removeGame}>Delete</button>
+                <button onClick={() => removeGame(game._id)}>Delete</button>
               </div>
             ))}
           </ul>

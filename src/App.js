@@ -35,7 +35,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home games={games} />} />
             <Route exact path="/Create" element={<Create />} />
-            <Route exact path="/Remove" element={<Remove  games={games}/>} />
+            <Route exact path="/Remove" element={<Remove  games={games} setError={setError} error={error}/>} />
           </Routes>
         </div>
       </div>
