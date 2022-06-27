@@ -5,10 +5,10 @@ const Home = ({games}) => {
       <ul>
             {games.map(game => (
               <div className="game-preview" key={game._id}>
-                <h2>{game.gameName}</h2>
-                <p>Type: {game.type}</p>
-                <p>URL: {game.url}</p>
-                <p>Date published: {game.published}</p>
+                <a href={game.url}>{game.gameName}</a><span> ({game.type})</span>
+                <p>Card game for ages 10+</p>
+                <p>Created: {game.published}</p>
+                <p>{game.note}</p>
               </div>
             ))}
           </ul>

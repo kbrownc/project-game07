@@ -4,7 +4,6 @@ const Remove = ({games, setError, error}) => {
   const navigate = useNavigate();
 
   const removeGame = (id) => {
-    //e.preventDefault();
     const options = {
       method: 'DELETE'
     };
@@ -21,7 +20,7 @@ const Remove = ({games, setError, error}) => {
 
   return (
     <div className="home">
-      <h2>Delete Game</h2>
+      <h2>Delete App</h2>
       {error && <div>{error}</div>}
       <ul>
             {games.map(game => (
@@ -30,6 +29,7 @@ const Remove = ({games, setError, error}) => {
                 <p>Type: {game.type}</p>
                 <p>URL: {game.url}</p>
                 <p>Date published: {game.published}</p>
+                <p>App Note: {game.note}</p>
                 <button onClick={() => removeGame(game._id)}>Delete</button>
               </div>
             ))}

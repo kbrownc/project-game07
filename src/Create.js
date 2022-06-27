@@ -5,14 +5,15 @@ const Create = () => {
   const [gameName, setGameName] = useState('');
   const [type, setType] = useState('');
   const [url, setUrl] = useState('');
+  const [note, setNote] = useState('');
   const [error, setError] = useState(null);
 
-  const published = new Date().toDateString();
+  const published = new Date().toLocaleDateString();
   const navigate = useNavigate();
 
   const addGame = e => {
     e.preventDefault();
-    const game = { gameName, type, url, published };
+    const game = { gameName, type, url, published, note };
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,20 +31,23 @@ const Create = () => {
 
   return (
     <div className="create">
-      <h2>Add Game</h2>
+      <h2>Add app</h2>
         {error && <div>{error}</div>}
        <form onSubmit={addGame}>
-        <label>Game Name</label>
+        <label>App Name</label>
         <input type="text" required value={gameName} onChange={e => setGameName(e.target.value)} />
-        <label>Game Type</label>
+        <label>App Type</label>
         <input type="text" required value={type} onChange={e => setType(e.target.value)} />
-        <label>Game URL</label>
+        <label>App URL</label>
         <input type="text" required value={url} onChange={e => setUrl(e.target.value)} />
+        <label>App Note</label>
+        <input type="text" required value={note} onChange={e => setNote(e.target.value)} />
         <p></p>
-        <button>Add Game</button>
+        <button>Add App</button>
         <p>{gameName}</p>
         <p>{type}</p>
         <p>{url}</p>
+        <p>{note}</p>
       </form>
     </div>
   );
