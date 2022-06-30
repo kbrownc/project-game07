@@ -44,10 +44,6 @@ const Create = () => {
         <input type="text" required value={note} onChange={e => setNote(e.target.value)} />
         <p></p>
         <button>Add App</button>
-        <p>{gameName}</p>
-        <p>{type}</p>
-        <p>{url}</p>
-        <p>{note}</p>
       </form>
     </div>
   );
