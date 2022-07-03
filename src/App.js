@@ -36,8 +36,16 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home games={games} />} />
             <Route exact path="/Create" element={<Create />} />
-            <Route exact path="/Remove" element={<Remove  games={games} setError={setError} error={error}/>} />
-            <Route exact path="/Update" element={<Update  games={games} setError={setError} error={error}/>} />
+            <Route
+              exact
+              path="/Remove"
+              element={<Remove games={games} setError={setError} error={error} />}
+            />
+            <Route
+              exact
+              path="/Update"
+              element={<Update games={games} setError={setError} error={error} />}
+            />
           </Routes>
         </div>
       </div>

@@ -32,8 +32,8 @@ const Create = () => {
   return (
     <div className="create">
       <h2>Add app</h2>
-        {error && <div>{error}</div>}
-       <form onSubmit={addGame}>
+      {error && <div>{error}</div>}
+      <form onSubmit={addGame}>
         <label>App Name</label>
         <input type="text" required value={gameName} onChange={e => setGameName(e.target.value)} />
         <label>App Type</label>
