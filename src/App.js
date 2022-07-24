@@ -12,20 +12,19 @@ function App() {
 
   useEffect(() => {
     fetch('/api/games')
-      .then(res => {
-        if (!res.ok) {
-          throw Error('could not fetch data for api/games');
-        }
-        return res.json();
-      })
-      .then(games => {
-        setGames(games);
-        setError(null);
-      })
+      .then(res => res.json())
+      .then(
+        games => {
+          setGames(games)
+          setError(null)
+        },
+        () => console.log('games', games)
+      )
       .catch(err => {
-        setError(err.message);
+        setError(err.message)
+        console.log('err', err.message)
       });
-  }, [games]);
+  }, []);
 
   return (
     <Router>
