@@ -5,7 +5,7 @@ const Remove = ({ games, setError, error }) => {
 
   const removeGame = id => {
     const options = {
-      method: 'DELETE',
+      method: 'DELETE'
     };
     fetch('/api/games/' + id, options)
       .then(res => res.json())
